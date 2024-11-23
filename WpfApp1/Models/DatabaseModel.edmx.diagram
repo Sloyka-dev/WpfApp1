@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7e41068ce22c4136b36f011e3b1dc289" Name="Diagram1">
+        <EntityTypeShape EntityType="RealtorAgentModel.Customer" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="RealtorAgentModel.Deal" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="RealtorAgentModel.Passport" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RealtorAgentModel.Property" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="RealtorAgentModel.Realtor" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RealtorAgentModel.Seller" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
+        <AssociationConnector Association="RealtorAgentModel.FK__Customer__Passpo__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="RealtorAgentModel.FK__Deal__CustomerId__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="RealtorAgentModel.FK__Deal__PropertyId__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="RealtorAgentModel.FK__Deal__RealtorId__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="RealtorAgentModel.FK__Property__Seller__5441852A" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

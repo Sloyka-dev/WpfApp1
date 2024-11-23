@@ -1,0 +1,423 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище RealtorAgentModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Phone" Type="nchar" MaxLength="11" />
+          <Property Name="PassportId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Deal">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PropertyId" Type="int" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="RealtorId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="RegistrationCode" Type="nchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Passport">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Series" Type="nchar" MaxLength="4" Nullable="false" />
+          <Property Name="Number" Type="nchar" MaxLength="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Property">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoomNumber" Type="int" Nullable="false" />
+          <Property Name="Square" Type="int" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="HasBalcony" Type="bit" Nullable="false" />
+          <Property Name="Cost" Type="money" Nullable="false" />
+          <Property Name="SellerId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Realtor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Phone" Type="nchar" MaxLength="11" />
+        </EntityType>
+        <EntityType Name="Seller">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Phone" Type="nchar" MaxLength="11" />
+        </EntityType>
+        <Association Name="FK__Customer__Passpo__4D94879B">
+          <End Role="Passport" Type="Self.Passport" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Passport">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="PassportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Deal__CustomerId__5812160E">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Deal" Type="Self.Deal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Deal">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Deal__PropertyId__571DF1D5">
+          <End Role="Property" Type="Self.Property" Multiplicity="1" />
+          <End Role="Deal" Type="Self.Deal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Property">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Deal">
+              <PropertyRef Name="PropertyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Deal__RealtorId__59063A47">
+          <End Role="Realtor" Type="Self.Realtor" Multiplicity="1" />
+          <End Role="Deal" Type="Self.Deal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Realtor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Deal">
+              <PropertyRef Name="RealtorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Property__Seller__5441852A">
+          <End Role="Seller" Type="Self.Seller" Multiplicity="1" />
+          <End Role="Property" Type="Self.Property" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seller">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Property">
+              <PropertyRef Name="SellerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище RealtorAgentModelContainer">
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Deal" EntityType="Self.Deal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Passport" EntityType="Self.Passport" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Property" EntityType="Self.Property" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Realtor" EntityType="Self.Realtor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Seller" EntityType="Self.Seller" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Customer__Passpo__4D94879B" Association="Self.FK__Customer__Passpo__4D94879B">
+            <End Role="Passport" EntitySet="Passport" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Deal__CustomerId__5812160E" Association="Self.FK__Deal__CustomerId__5812160E">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Deal" EntitySet="Deal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Deal__PropertyId__571DF1D5" Association="Self.FK__Deal__PropertyId__571DF1D5">
+            <End Role="Property" EntitySet="Property" />
+            <End Role="Deal" EntitySet="Deal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Deal__RealtorId__59063A47" Association="Self.FK__Deal__RealtorId__59063A47">
+            <End Role="Realtor" EntitySet="Realtor" />
+            <End Role="Deal" EntitySet="Deal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Property__Seller__5441852A" Association="Self.FK__Property__Seller__5441852A">
+            <End Role="Seller" EntitySet="Seller" />
+            <End Role="Property" EntitySet="Property" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RealtorAgentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="PassportId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Passport" Relationship="Self.FK__Customer__Passpo__4D94879B" FromRole="Customer" ToRole="Passport" />
+          <NavigationProperty Name="Deal" Relationship="Self.FK__Deal__CustomerId__5812160E" FromRole="Customer" ToRole="Deal" />
+        </EntityType>
+        <EntityType Name="Deal">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PropertyId" Type="Int32" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="RealtorId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="RegistrationCode" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__Deal__CustomerId__5812160E" FromRole="Deal" ToRole="Customer" />
+          <NavigationProperty Name="Property" Relationship="Self.FK__Deal__PropertyId__571DF1D5" FromRole="Deal" ToRole="Property" />
+          <NavigationProperty Name="Realtor" Relationship="Self.FK__Deal__RealtorId__59063A47" FromRole="Deal" ToRole="Realtor" />
+        </EntityType>
+        <EntityType Name="Passport">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Series" Type="String" MaxLength="4" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Number" Type="String" MaxLength="6" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__Customer__Passpo__4D94879B" FromRole="Passport" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Property">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoomNumber" Type="Int32" Nullable="false" />
+          <Property Name="Square" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HasBalcony" Type="Boolean" Nullable="false" />
+          <Property Name="Cost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="SellerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Deal" Relationship="Self.FK__Deal__PropertyId__571DF1D5" FromRole="Property" ToRole="Deal" />
+          <NavigationProperty Name="Seller" Relationship="Self.FK__Property__Seller__5441852A" FromRole="Property" ToRole="Seller" />
+        </EntityType>
+        <EntityType Name="Realtor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Deal" Relationship="Self.FK__Deal__RealtorId__59063A47" FromRole="Realtor" ToRole="Deal" />
+        </EntityType>
+        <EntityType Name="Seller">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Property" Relationship="Self.FK__Property__Seller__5441852A" FromRole="Seller" ToRole="Property" />
+        </EntityType>
+        <Association Name="FK__Customer__Passpo__4D94879B">
+          <End Role="Passport" Type="Self.Passport" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Passport">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="PassportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Deal__CustomerId__5812160E">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Deal" Type="Self.Deal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Deal">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Deal__PropertyId__571DF1D5">
+          <End Role="Property" Type="Self.Property" Multiplicity="1" />
+          <End Role="Deal" Type="Self.Deal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Property">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Deal">
+              <PropertyRef Name="PropertyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Deal__RealtorId__59063A47">
+          <End Role="Realtor" Type="Self.Realtor" Multiplicity="1" />
+          <End Role="Deal" Type="Self.Deal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Realtor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Deal">
+              <PropertyRef Name="RealtorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Property__Seller__5441852A">
+          <End Role="Seller" Type="Self.Seller" Multiplicity="1" />
+          <End Role="Property" Type="Self.Property" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seller">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Property">
+              <PropertyRef Name="SellerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RealtorAgentEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customer" EntityType="Self.Customer" />
+          <EntitySet Name="Deal" EntityType="Self.Deal" />
+          <EntitySet Name="Passport" EntityType="Self.Passport" />
+          <EntitySet Name="Property" EntityType="Self.Property" />
+          <EntitySet Name="Realtor" EntityType="Self.Realtor" />
+          <EntitySet Name="Seller" EntityType="Self.Seller" />
+          <AssociationSet Name="FK__Customer__Passpo__4D94879B" Association="Self.FK__Customer__Passpo__4D94879B">
+            <End Role="Passport" EntitySet="Passport" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Deal__CustomerId__5812160E" Association="Self.FK__Deal__CustomerId__5812160E">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Deal" EntitySet="Deal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Deal__PropertyId__571DF1D5" Association="Self.FK__Deal__PropertyId__571DF1D5">
+            <End Role="Property" EntitySet="Property" />
+            <End Role="Deal" EntitySet="Deal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Deal__RealtorId__59063A47" Association="Self.FK__Deal__RealtorId__59063A47">
+            <End Role="Realtor" EntitySet="Realtor" />
+            <End Role="Deal" EntitySet="Deal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Property__Seller__5441852A" Association="Self.FK__Property__Seller__5441852A">
+            <End Role="Seller" EntitySet="Seller" />
+            <End Role="Property" EntitySet="Property" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище RealtorAgentModelContainer" CdmEntityContainer="RealtorAgentEntities">
+          <EntitySetMapping Name="Customer">
+            <EntityTypeMapping TypeName="RealtorAgentModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="PassportId" ColumnName="PassportId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Deal">
+            <EntityTypeMapping TypeName="RealtorAgentModel.Deal">
+              <MappingFragment StoreEntitySet="Deal">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="RealtorId" ColumnName="RealtorId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="RegistrationCode" ColumnName="RegistrationCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Passport">
+            <EntityTypeMapping TypeName="RealtorAgentModel.Passport">
+              <MappingFragment StoreEntitySet="Passport">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Series" ColumnName="Series" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Property">
+            <EntityTypeMapping TypeName="RealtorAgentModel.Property">
+              <MappingFragment StoreEntitySet="Property">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RoomNumber" ColumnName="RoomNumber" />
+                <ScalarProperty Name="Square" ColumnName="Square" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="HasBalcony" ColumnName="HasBalcony" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="SellerId" ColumnName="SellerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Realtor">
+            <EntityTypeMapping TypeName="RealtorAgentModel.Realtor">
+              <MappingFragment StoreEntitySet="Realtor">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Seller">
+            <EntityTypeMapping TypeName="RealtorAgentModel.Seller">
+              <MappingFragment StoreEntitySet="Seller">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
