@@ -6,111 +6,95 @@
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <DockPanel LastChildFill="True">
+    <Grid>
 
-        <Menu DockPanel.Dock="Top">
+        <Grid.RowDefinitions>
 
-            <MenuItem x:Name="TableMenu" 
-                      Header="Таблицы"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition/>
 
-            <MenuItem x:Name="CellMenu"
-                      Header="Поля"/>
+        </Grid.RowDefinitions>
 
-        </Menu>
-
-        <Grid>
+        <Grid Grid.Row="0">
 
             <Grid.RowDefinitions>
 
-                <RowDefinition Height="100"/>
+                <RowDefinition/>
                 <RowDefinition/>
 
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
 
-                <Grid.RowDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
 
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
+            </Grid.ColumnDefinitions>
 
-                </Grid.RowDefinitions>
-
-                <Grid.ColumnDefinitions>
-
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-
-                </Grid.ColumnDefinitions>
-
-                <Label
+            <Label
                     Grid.Row="0" 
                     Grid.Column="0" 
                     Grid.ColumnSpan="2"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center">Выберите таблицу</Label>
 
-                <ComboBox
+            <ComboBox
                     x:Name="ChooseTable"
                     Grid.Row="0"
                     Grid.Column="2"
                     Grid.ColumnSpan="2"
                     Margin="5">
-                    <ComboBoxItem Tag="Realtors">Риэлторы</ComboBoxItem>
-                    <ComboBoxItem Tag="Sellers">Продавцы</ComboBoxItem>
-                    <ComboBoxItem Tag="Customers">Клиенты</ComboBoxItem>
-                    <ComboBoxItem Tag="PropertiesWithSellers">Квартиры с продовцами</ComboBoxItem>
-                    <ComboBoxItem Tag="Properties">Квартиры</ComboBoxItem>
-                    <ComboBoxItem Tag="Deals">Сделки</ComboBoxItem>
-                </ComboBox>
+                <ComboBoxItem Tag="Realtors">Риэлторы</ComboBoxItem>
+                <ComboBoxItem Tag="Sellers">Продавцы</ComboBoxItem>
+                <ComboBoxItem Tag="Customers">Клиенты</ComboBoxItem>
+                <ComboBoxItem Tag="PropertiesWithSellers">Квартиры с продовцами</ComboBoxItem>
+                <ComboBoxItem Tag="Properties">Квартиры</ComboBoxItem>
+                <ComboBoxItem Tag="Deals">Сделки</ComboBoxItem>
+            </ComboBox>
 
-                <Label
+            <Label
                     Grid.Row="1" 
                     Grid.Column="0"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center">Поиск по</Label>
 
-                <ComboBox 
+            <ComboBox 
                     x:Name="SearchList"
                     Grid.Row="1"
                     Grid.Column="1"
                     Margin="5"/>
 
-                <Label
+            <Label
                     Grid.Row="1" 
                     Grid.Column="2"
                     VerticalAlignment="Center"
-                    HorizontalAlignment="Center"></Label>
+                    HorizontalAlignment="Center">Введите шаблон</Label>
 
-                <TextBox
+            <TextBox
                     x:Name="SearchText"
                     Grid.Row="1" 
                     Grid.Column="3"
                     Margin="5"/>
 
-            </Grid>
+        </Grid>
 
-            <ScrollViewer
+        <ScrollViewer
                 Grid.Row="1"
                 VerticalScrollBarVisibility="Auto"
                 HorizontalScrollBarVisibility="Auto">
 
-                <DockPanel>
+            <DockPanel>
 
-                    <Grid 
+                <Grid 
                         x:Name="Header"
                         DockPanel.Dock="Top"/>
 
-                    <Grid x:Name="Data"/>
+                <Grid x:Name="Data"/>
 
-                </DockPanel>
-                
-            </ScrollViewer>
-            
-        </Grid>
+            </DockPanel>
 
-    </DockPanel>
+        </ScrollViewer>
+    </Grid>
 </Window>
