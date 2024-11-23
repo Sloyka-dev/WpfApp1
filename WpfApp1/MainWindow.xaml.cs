@@ -150,6 +150,8 @@ namespace WpfApp1
 
             var textBox = new TextBox();
             textBox.Text = text;
+            textBox.HorizontalContentAlignment = HorizontalAlignment.Center;
+            textBox.VerticalContentAlignment = VerticalAlignment.Center;
             Grid.SetColumn(textBox, column);
             Grid.SetRow(textBox, row);
             grid.Children.Add(textBox);
@@ -163,12 +165,29 @@ namespace WpfApp1
 
             var button = new Button();
             button.Content = text;
+            button.HorizontalContentAlignment = HorizontalAlignment.Center;
+            button.VerticalContentAlignment = VerticalAlignment.Center;
             button.Click += (o, e) => func.Invoke();
             Grid.SetColumn(button, column);
             Grid.SetRow(button, row);
             grid.Children.Add(button);
 
             return button;
+
+        }
+
+        private CheckBox CreateCheckBox(Grid grid, int column = 0, int row = 0, bool content = false)
+        {
+
+            var checkBox = new CheckBox();
+            checkBox.IsChecked = content;
+            checkBox.HorizontalAlignment = HorizontalAlignment.Center;
+            checkBox.VerticalAlignment = VerticalAlignment.Center;
+            Grid.SetColumn(checkBox, column);
+            Grid.SetRow(checkBox, row);
+            grid.Children.Add(checkBox);
+
+            return checkBox;
 
         }
 
@@ -414,7 +433,7 @@ namespace WpfApp1
                 var Phone = CreateTextBox(Data, 3, i, item.SellerPhone);
                 var RoomNumber = CreateTextBox(Data, 4, i, item.PropertyRoomNumber.ToString());
                 var Square = CreateTextBox(Data, 5, i, item.PropertySquare.ToString());
-                var HasBalcony = CreateTextBox(Data, 6, i, item.PropertyHasBalcony.ToString());
+                var HasBalcony = CreateCheckBox(Data, 6, i, item.PropertyHasBalcony);
                 var Cost = CreateTextBox(Data, 7, i, item.PropertyCost.ToString());
                 var Address = CreateTextBox(Data, 8, i, item.PropertyAddress);
 
@@ -439,8 +458,7 @@ namespace WpfApp1
                     if (Square.Text.Length > 0 && Regex.IsMatch(Square.Text, "^[0-9]{4}$")) item.PropertySquare = int.Parse(Square.Text);
                     else MessageBox.Show(ERROR_TEXT, ERROR_CAPTION, MessageBoxButton.OK, MessageBoxImage.Error);
 
-                    if (HasBalcony.Text.Length > 0 && Regex.IsMatch(HasBalcony.Text, "^[0-9]{4}$")) item.PropertyHasBalcony = bool.Parse(HasBalcony.Text);
-                    else MessageBox.Show(ERROR_TEXT, ERROR_CAPTION, MessageBoxButton.OK, MessageBoxImage.Error);
+                    item.PropertyHasBalcony = HasBalcony.IsChecked ?? false;
 
                     if (Cost.Text.Length > 0 && Regex.IsMatch(Cost.Text, "^[0-9]{4}$")) item.PropertyCost = int.Parse(Cost.Text);
                     else MessageBox.Show(ERROR_TEXT, ERROR_CAPTION, MessageBoxButton.OK, MessageBoxImage.Error);
@@ -496,7 +514,7 @@ namespace WpfApp1
 
                 var RoomNumber = CreateTextBox(Data, 0, i, item.RoomNumber.ToString());
                 var Square = CreateTextBox(Data, 1, i, item.Square.ToString());
-                var HasBalcony = CreateTextBox(Data, 2, i, item.HasBalcony.ToString());
+                var HasBalcony = CreateCheckBox(Data, 2, i, item.HasBalcony);
                 var Cost = CreateTextBox(Data, 3, i, item.Cost.ToString());
                 var Address = CreateTextBox(Data, 4, i, item.Address);
 
@@ -509,8 +527,7 @@ namespace WpfApp1
                     if (Square.Text.Length > 0 && Regex.IsMatch(Square.Text, "^[0-9]{4}$")) item.Square = int.Parse(Square.Text);
                     else MessageBox.Show(ERROR_TEXT, ERROR_CAPTION, MessageBoxButton.OK, MessageBoxImage.Error);
 
-                    if (HasBalcony.Text.Length > 0 && Regex.IsMatch(HasBalcony.Text, "^[0-9]{4}$")) item.HasBalcony = bool.Parse(HasBalcony.Text);
-                    else MessageBox.Show(ERROR_TEXT, ERROR_CAPTION, MessageBoxButton.OK, MessageBoxImage.Error);
+                    item.HasBalcony = HasBalcony.IsChecked ?? false;
 
                     if (Cost.Text.Length > 0 && Regex.IsMatch(Cost.Text, "^[0-9]{4}$")) item.Cost = int.Parse(Cost.Text);
                     else MessageBox.Show(ERROR_TEXT, ERROR_CAPTION, MessageBoxButton.OK, MessageBoxImage.Error);
@@ -592,7 +609,7 @@ namespace WpfApp1
                 CreateTextBox(Data, 13, i, item.SellerPhone);
                 CreateTextBox(Data, 14, i, item.PropertyRoomNumber.ToString());
                 CreateTextBox(Data, 15, i, item.PropertySquare.ToString());
-                CreateTextBox(Data, 16, i, item.PropertyHasBalcony.ToString());
+                CreateCheckBox(Data, 16, i, item.PropertyHasBalcony);
                 CreateTextBox(Data, 17, i, item.PropertyCost.ToString());
                 CreateTextBox(Data, 18, i, item.PropertyAddress);
 
