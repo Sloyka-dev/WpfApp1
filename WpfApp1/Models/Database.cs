@@ -443,7 +443,6 @@ namespace WpfApp1.Models
                 PropertyRoomNumber = ps.PropertyRoomNumber,
                 PropertySquare = ps.PropertySquare
 
-
             });
 
             switch (option)

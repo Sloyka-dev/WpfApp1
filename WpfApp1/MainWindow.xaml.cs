@@ -17,6 +17,8 @@ namespace WpfApp1
         private const int CELL_W_SIZE = 150;
         private const int CELL_H_SIZE = 30;
 
+        private const string DELETE_TEXT = "Вы точно хотите удалить запись?";
+        private const string DELETE_CAPTION = "Удаление записи";
         private const string ERROR_TEXT = "Ошибка ввода данных!\nПовторите снова.";
         private const string ERROR_CAPTION = "Ошибка ввода данных";
 
@@ -245,6 +247,8 @@ namespace WpfApp1
                 var DeleteButton = CreateButton(Data, () =>
                 {
 
+                    if (MessageBox.Show(DELETE_TEXT, DELETE_CAPTION, MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.ServiceNotification) == MessageBoxResult.No) return;
+
                     Database.DeleteRealtor(item.Id);
                     GetRealtors(sortTag, tableTag);
 
@@ -309,6 +313,8 @@ namespace WpfApp1
 
                 var DeleteButton = CreateButton(Data, () =>
                 {
+
+                    if (MessageBox.Show(DELETE_TEXT, DELETE_CAPTION, MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.ServiceNotification) == MessageBoxResult.No) return;
 
                     Database.DeleteSeller(item.Id);
                     GetSellers(sortTag, tableTag);
@@ -384,6 +390,8 @@ namespace WpfApp1
 
                 var DeleteButton = CreateButton(Data, () =>
                 {
+
+                    if (MessageBox.Show(DELETE_TEXT, DELETE_CAPTION, MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.ServiceNotification) == MessageBoxResult.No) return;
 
                     Database.DeleteCustomer(item.Id);
                     GetCustomers(sortTag, tableTag);
@@ -474,6 +482,8 @@ namespace WpfApp1
                 var DeleteButton = CreateButton(Data, () =>
                 {
 
+                    if (MessageBox.Show(DELETE_TEXT, DELETE_CAPTION, MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.ServiceNotification) == MessageBoxResult.No) return;
+
                     Database.DeleteProperty(item.PropertyId);
                     GetPropertiesWithSellers(sortTag, tableTag);
 
@@ -542,6 +552,8 @@ namespace WpfApp1
 
                 var DeleteButton = CreateButton(Data, () =>
                 {
+
+                    if (MessageBox.Show(DELETE_TEXT, DELETE_CAPTION, MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.ServiceNotification) == MessageBoxResult.No) return;
 
                     Database.DeleteProperty(item.Id);
                     GetProperties(sortTag, tableTag);
