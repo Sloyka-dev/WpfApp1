@@ -872,8 +872,6 @@ namespace WpfApp1
             AddColumnDefinitions(Data, CELL_W_SIZE, 9);
             AddColumnDefinitions(Header, CELL_W_SIZE, 2);
 
-            AddRowDefinitions(Header, CELL_H_SIZE);
-
             CreateLabel(Header, 6, 0, "Изменить");
             CreateLabel(Header, 7, 0, "Удалить");
 
