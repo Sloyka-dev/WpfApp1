@@ -24,6 +24,13 @@ namespace WpfApp1.Models
 
         }
 
+        public static void Add(Realtor item) => context.Realtor.Add(item);
+        public static void Add(Customer item) => context.Customer.Add(item);
+        public static void Add(Passport item) => context.Passport.Add(item);
+        public static void Add(Seller item) => context.Seller.Add(item);
+        public static void Add(Property item) => context.Property.Add(item);
+        public static void Add(Deal item) => context.Deal.Add(item);
+
         public static void Save() => context.SaveChanges();
 
         public static void DeleteRealtor(int id)
