@@ -151,7 +151,7 @@ namespace WpfApp1
 
                 GetRealtors();
 
-            }, 5, 1, "Удалить");
+            }, 6, 1, "Удалить");
 
         }
 
@@ -161,11 +161,11 @@ namespace WpfApp1
             ClearGrid(Data);
             AddSellerHeader();
 
-            AddColumnDefinitions(Data, CELL_W_SIZE, 8);
+            AddColumnDefinitions(Data, CELL_W_SIZE, 7);
             AddColumnDefinitions(Header, CELL_W_SIZE, 2);
 
-            CreateLabel(Header, 6, 0, "Создать");
-            CreateLabel(Header, 7, 0, "Удалить");
+            CreateLabel(Header, 5, 0, "Создать");
+            CreateLabel(Header, 6, 0, "Удалить");
 
             AddRowDefinitions(Data, CELL_H_SIZE);
 
@@ -216,13 +216,13 @@ namespace WpfApp1
 
                 GetSellers();
 
-            }, 6, 1, "Создать");
+            }, 5, 0, "Создать");
             CreateButton(Data, () =>
             {
 
                 GetSellers();
 
-            }, 7, 1, "Удалить");
+            }, 6, 0, "Удалить");
 
         }
 
@@ -301,13 +301,13 @@ namespace WpfApp1
 
                 GetCustomers();
 
-            }, 7, 1, "Создать");
+            }, 7, 0, "Создать");
             CreateButton(Data, () =>
             {
 
                 GetCustomers();
 
-            }, 8, 1, "Удалить");
+            }, 8, 0, "Удалить");
 
         }
 
@@ -321,7 +321,7 @@ namespace WpfApp1
             AddColumnDefinitions(Header, CELL_W_SIZE, 3);
 
             CreateLabel(Header, 6, 0, "Продавец");
-            CreateLabel(Header, 7, 0, "Изменить");
+            CreateLabel(Header, 7, 0, "Создать");
             CreateLabel(Header, 8, 0, "Удалить");
 
             AddRowDefinitions(Data, CELL_H_SIZE);
@@ -466,14 +466,14 @@ namespace WpfApp1
                 Database.Save();
                 GetProperties();
 
-            }, 7, 1, "Создать");
+            }, 6, 1, "Создать");
 
             CreateButton(Data, () =>
             {
 
                 GetProperties();
 
-            }, 8, 1, "Удалить");
+            }, 7, 1, "Удалить");
 
         }
 
@@ -872,8 +872,8 @@ namespace WpfApp1
             AddColumnDefinitions(Data, CELL_W_SIZE, 9);
             AddColumnDefinitions(Header, CELL_W_SIZE, 2);
 
-            CreateLabel(Header, 6, 0, "Изменить");
-            CreateLabel(Header, 7, 0, "Удалить");
+            CreateLabel(Header, 7, 0, "Изменить");
+            CreateLabel(Header, 8, 0, "Удалить");
 
             int i = 0;
             foreach (var item in res)
@@ -939,8 +939,8 @@ namespace WpfApp1
             ClearGrid(Data);
             ClearGrid(Header);
 
-            AddColumnDefinitions(Data, CELL_W_SIZE, 10);
-            AddColumnDefinitions(Header, CELL_W_SIZE, 10);
+            AddColumnDefinitions(Data, CELL_W_SIZE, 11);
+            AddColumnDefinitions(Header, CELL_W_SIZE, 11);
 
             AddRowDefinitions(Header, CELL_H_SIZE);
 
