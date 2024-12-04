@@ -349,7 +349,7 @@ namespace WpfApp1
                         return;
                     }
 
-                    if (Cost.Text.Length == 0 || !Regex.IsMatch(Cost.Text, "^[0-9]*$"))
+                    if (Cost.Text.Length == 0 || !Regex.IsMatch(Cost.Text, "^[0-9]*.[0-9]*$"))
                     {
                         MessageBox.Show(string.Format(ERROR_TEXT, "стоимость"), ERROR_CAPTION, MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
@@ -754,9 +754,21 @@ namespace WpfApp1
                 var DeleteButton = CreateButton(Data, () =>
                 {
 
+                    try { 
+
                     if (MessageBox.Show(DELETE_TEXT, DELETE_CAPTION, MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.ServiceNotification) == MessageBoxResult.No) return;
 
                     Database.DeleteRealtor(item.Id);
+
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show("Не получилось удалить данные", DELETE_CAPTION, MessageBoxButton.OK, MessageBoxImage.Error);
+
+                    }
+
                     GetRealtors(sortTag, tableTag);
 
                 }, 6, i, "Удалить");
@@ -831,9 +843,21 @@ namespace WpfApp1
                 var DeleteButton = CreateButton(Data, () =>
                 {
 
+                    try { 
+
                     if (MessageBox.Show(DELETE_TEXT, DELETE_CAPTION, MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.ServiceNotification) == MessageBoxResult.No) return;
 
                     Database.DeleteSeller(item.Id);
+
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show("Не получилось удалить данные", DELETE_CAPTION, MessageBoxButton.OK, MessageBoxImage.Error);
+
+                    }
+
                     GetSellers(sortTag, tableTag);
 
                 }, 6, i, "Удалить");
@@ -918,9 +942,21 @@ namespace WpfApp1
                 var DeleteButton = CreateButton(Data, () =>
                 {
 
+                    try { 
+
                     if (MessageBox.Show(DELETE_TEXT, DELETE_CAPTION, MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.ServiceNotification) == MessageBoxResult.No) return;
 
                     Database.DeleteCustomer(item.Id);
+
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show("Не получилось удалить данные", DELETE_CAPTION, MessageBoxButton.OK, MessageBoxImage.Error);
+
+                    }
+
                     GetCustomers(sortTag, tableTag);
 
                 }, 8, i, "Удалить");
@@ -995,7 +1031,7 @@ namespace WpfApp1
 
                     item.PropertyHasBalcony = HasBalcony.IsChecked ?? false;
 
-                    if (Cost.Text.Length > 0 && Regex.IsMatch(Cost.Text, "^[0-9]*$")) item.PropertyCost = int.Parse(Cost.Text);
+                    if (Cost.Text.Length > 0 && Regex.IsMatch(Cost.Text, "^[0-9]*$")) item.PropertyCost = decimal.Parse(Cost.Text);
                     else MessageBox.Show(string.Format(ERROR_TEXT, "Стоимость"), ERROR_CAPTION, MessageBoxButton.OK, MessageBoxImage.Error);
 
                     if (Address.Text.Length > 0) item.PropertyAddress = Address.Text;
@@ -1009,9 +1045,20 @@ namespace WpfApp1
                 var DeleteButton = CreateButton(Data, () =>
                 {
 
+                    try { 
                     if (MessageBox.Show(DELETE_TEXT, DELETE_CAPTION, MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.ServiceNotification) == MessageBoxResult.No) return;
 
                     Database.DeleteProperty(item.PropertyId);
+
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show("Не получилось удалить данные", DELETE_CAPTION, MessageBoxButton.OK, MessageBoxImage.Error);
+
+                    }
+
                     GetPropertiesWithSellers(sortTag, tableTag);
 
                 }, 10, i, "Удалить");
@@ -1037,7 +1084,6 @@ namespace WpfApp1
             CreateLabel(Header, 5, 0, "Адрес");
 
         }
-
 
         private void GetProperties(SorterOption sortTag = SorterOption.None, string tableTag = "")
         {
@@ -1069,18 +1115,18 @@ namespace WpfApp1
                 var EditButton = CreateButton(Data, () =>
                 {
 
-                    if (RoomNumber.Text.Length > 0 && Regex.IsMatch(RoomNumber.Text, "^[0-9]{4}$")) item.RoomNumber = int.Parse(RoomNumber.Text);
+                    if (RoomNumber.Text.Length > 0 && Regex.IsMatch(RoomNumber.Text, "^[0-9]*$")) item.RoomNumber = int.Parse(RoomNumber.Text);
                     else MessageBox.Show(string.Format(ERROR_TEXT, "Количество комнат"), ERROR_CAPTION, MessageBoxButton.OK, MessageBoxImage.Error);
 
-                    if (Square.Text.Length > 0 && Regex.IsMatch(Square.Text, "^[0-9]{4}$")) item.Square = int.Parse(Square.Text);
+                    if (Square.Text.Length > 0 && Regex.IsMatch(Square.Text, "^[0-9]*$")) item.Square = int.Parse(Square.Text);
                     else MessageBox.Show(string.Format(ERROR_TEXT, "Площадь"), ERROR_CAPTION, MessageBoxButton.OK, MessageBoxImage.Error);
 
                     item.HasBalcony = HasBalcony.IsChecked ?? false;
 
-                    if (Cost.Text.Length > 0 && Regex.IsMatch(Cost.Text, "^[0-9]{4}$")) item.Cost = int.Parse(Cost.Text);
+                    if (Cost.Text.Length > 0 && Regex.IsMatch(Cost.Text, "^[0-9]*.[0-9]*$")) item.Cost = decimal.Parse(Cost.Text);
                     else MessageBox.Show(string.Format(ERROR_TEXT, "Стоимость"), ERROR_CAPTION, MessageBoxButton.OK, MessageBoxImage.Error);
 
-                    if (Address.Text.Length > 0 && Regex.IsMatch(Address.Text, "^[А-Яа-ё,\\s]*$")) item.Address = Address.Text;
+                    if (Address.Text.Length > 0) item.Address = Address.Text;
                     else MessageBox.Show(string.Format(ERROR_TEXT, "Адрес"), ERROR_CAPTION, MessageBoxButton.OK, MessageBoxImage.Error);
 
                     Database.Save();
@@ -1091,10 +1137,22 @@ namespace WpfApp1
                 var DeleteButton = CreateButton(Data, () =>
                 {
 
-                    if (MessageBox.Show(DELETE_TEXT, DELETE_CAPTION, MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.ServiceNotification) == MessageBoxResult.No) return;
+                    try
+                    {
 
-                    Database.DeleteProperty(item.Id);
+                        if (MessageBox.Show(DELETE_TEXT, DELETE_CAPTION, MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.ServiceNotification) == MessageBoxResult.No) return;
+                        Database.DeleteProperty(item.Id);
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show("Не получилось удалить данные", DELETE_CAPTION, MessageBoxButton.OK, MessageBoxImage.Error);
+
+                    }
+
                     GetProperties(sortTag, tableTag);
+
 
                 }, 7, i, "Удалить");
 
